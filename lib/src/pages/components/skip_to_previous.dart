@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../main.dart';
+import '../../../main.dart';
 
 class SkipToPrevious extends StatelessWidget {
   const SkipToPrevious({super.key});
@@ -8,7 +8,10 @@ class SkipToPrevious extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: audioHandler.mediaItem.map((event) => event).distinct(),
+      stream: audioHandler.mediaItem
+          .asBroadcastStream()
+          .map((event) => event)
+          .distinct(),
       builder: (context, snapshot) {
         if (snapshot.data != null) {
           return IconButton(

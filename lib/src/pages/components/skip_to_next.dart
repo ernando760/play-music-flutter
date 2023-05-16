@@ -7,7 +7,10 @@ class SkipToNext extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: audioHandler.mediaItem.map((event) => event).distinct(),
+      stream: audioHandler.mediaItem
+          .asBroadcastStream()
+          .map((event) => event)
+          .distinct(),
       builder: (context, snapshot) {
         if (snapshot.data != null) {
           return IconButton(

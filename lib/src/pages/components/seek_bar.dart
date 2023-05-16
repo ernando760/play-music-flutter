@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:play_music/main.dart';
 import 'package:rxdart/rxdart.dart';
 
-import '../models/media_state.dart';
+import '../../models/media_state.dart';
 
 class SeekBar extends StatefulWidget {
   const SeekBar({super.key});
@@ -16,7 +16,7 @@ class _SeekBarState extends State<SeekBar> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: _mediaStateStream,
+      stream: _mediaStateStream.asBroadcastStream(),
       builder: (context, snapshot) {
         var mediaState = snapshot.data;
         if (mediaState != null) {
@@ -37,9 +37,3 @@ Stream<MediaState> get _mediaStateStream =>
         audioHandler.mediaItem,
         AudioService.position,
         (mediaItem, position) => MediaState(mediaItem, position));
-
-// IconButton button(IconData iconData, VoidCallback onPressed) => IconButton(
-//       icon: Icon(iconData),
-//       iconSize: 64.0,
-//       onPressed: onPressed,
-//     );

@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:play_music/main.dart';
 
@@ -12,11 +14,15 @@ class _ButtonPlayingState extends State<ButtonPlaying> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream:
-          audioHandler.playbackState.map((event) => event.playing).distinct(),
+      stream: audioHandler.playbackState
+          .asBroadcastStream()
+          .map((event) => event.playing)
+          .distinct(),
       builder: (context, snapshot) {
         var playing = snapshot.data;
+
         if (playing != null) {
+          print("playing: $playing");
           if (playing) {
             return IconButton(
                 onPressed: () async {
@@ -26,7 +32,7 @@ class _ButtonPlayingState extends State<ButtonPlaying> {
           }
           return IconButton(
               onPressed: () async {
-                audioHandler.play();
+                await audioHandler.play();
               },
               icon: const Icon(Icons.play_arrow));
         }
