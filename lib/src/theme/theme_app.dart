@@ -1,12 +1,24 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:play_music/src/theme/color_schemes.g.dart';
 
 class ThemeApp extends ChangeNotifier {
-  bool isDark = false;
+  ValueNotifier<bool> isDark = ValueNotifier<bool>(false);
+  ValueNotifier<ThemeMode> themeMode = ValueNotifier(ThemeMode.system);
+  late final ValueNotifier<ThemeData> theme =
+      ValueNotifier<ThemeData>(themelight);
 
-  ThemeData theme = ThemeData.light();
+  final themeDark = ThemeData(
+      useMaterial3: true,
+      brightness: Brightness.dark,
+      colorScheme: darkColorScheme);
+  final themelight =
+      ThemeData(useMaterial3: true, colorScheme: lightColorScheme);
 
-  void changeDark() {
-    isDark ? theme = ThemeData.dark() : theme = ThemeData.light();
-    notifyListeners();
+  void changeTheme(bool newValue) {
+    isDark.value = newValue;
+    theme.value = isDark.value ? themeDark : themelight;
+    log('isDark: ${isDark.value} \n brightness: ${theme.value.brightness}');
   }
 }

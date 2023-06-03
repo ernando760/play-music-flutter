@@ -15,6 +15,8 @@ class AppProvider {
     ),
     ChangeNotifierProvider(
       create: (context) => ThemeApp(),
-    )
+    ) // ChangeNotifierProvider(
+    //   create: (context) => ThemeApp(false),
+    // ),
   ];
 }

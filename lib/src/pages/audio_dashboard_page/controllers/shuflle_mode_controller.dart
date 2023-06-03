@@ -6,7 +6,7 @@ import '../../../../main.dart';
 class ShuffleModeController extends ValueNotifier<AudioServiceShuffleMode> {
   ShuffleModeController(super.value);
 
-  IconData shuffleIcon = Icons.shuffle;
+  Icon shuffleIcon = const Icon(Icons.shuffle);
 
   handleShuffleMode(
       {required AudioServiceShuffleMode audioServiceShuffleMode}) async {
@@ -20,8 +20,10 @@ class ShuffleModeController extends ValueNotifier<AudioServiceShuffleMode> {
 
     //  set shuffle mode icon
     shuffleIcon = value == AudioServiceShuffleMode.none
-        ? Icons.shuffle
-        : Icons.shuffle_on_sharp;
+        ? const Icon(Icons.shuffle)
+        : const Icon(
+            Icons.shuffle_on_outlined,
+          );
     notifyListeners();
   }
 }

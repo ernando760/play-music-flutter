@@ -46,6 +46,9 @@ dependencies:
   path_provider: ^2.0.11
   equatable: ^2.0.5
   on_audio_query: ^2.6.1
+  carousel_slider: ^4.2.1
+  animated_text_kit: ^4.2.2
+  simple_animations: ^5.0.0+3
 
 dev_dependencies:
   flutter_test:

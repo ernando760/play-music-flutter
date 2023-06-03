@@ -6,7 +6,6 @@ import 'package:play_music/main.dart';
 
 class RepeatModeController extends ValueNotifier<AudioServiceRepeatMode> {
   IconData repeatIcon = Icons.repeat;
-
   RepeatModeController(super.value);
   handleRepeatMode(
       {required AudioServiceRepeatMode audioServiceRepeatMode}) async {
@@ -17,6 +16,7 @@ class RepeatModeController extends ValueNotifier<AudioServiceRepeatMode> {
 
     // set repeat mode
     await audioHandler.setRepeatMode(value);
+    print(value);
 
     //  set repeat mode icon
     repeatIcon =
