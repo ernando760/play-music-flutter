@@ -15,10 +15,11 @@ class AudioDashboardPage extends StatefulWidget {
 
 class _AudioDashboardPageState extends State<AudioDashboardPage> {
   late final ThemeApp themeApp;
+
   @override
   void initState() {
-    themeApp = context.read<ThemeApp>();
     super.initState();
+    themeApp = context.read<ThemeApp>();
   }
 
   @override

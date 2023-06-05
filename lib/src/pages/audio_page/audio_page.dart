@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:play_music/main.dart';
 import 'package:play_music/src/extensions/context_theme_extension.dart';
 import 'package:play_music/src/pages/audio_dashboard_page/audio_dashboard_page.dart';
+import 'package:play_music/src/pages/audio_page/widgets/draggable_scroll_playlist.dart';
 import 'package:play_music/src/pages/audio_page/widgets/playground_media.dart';
 
 class AudioPage extends StatefulWidget {
@@ -64,9 +65,19 @@ class _AudioPageState extends State<AudioPage>
           );
         },
       ),
+      const DraggableScrollPlaylist()
     ])));
   }
 }
+
+// SliverFixedExtentList.builder(
+//                         itemCount: 30,
+//                         itemBuilder: (context, index) {
+//                           return Text('Item index $index');
+//                         },
+//                         itemExtent: 10)
+
+
 // Padding(
 //         padding: const EdgeInsets.symmetric(horizontal: 10),
 //         child: DraggableScrollableSheet(

@@ -14,19 +14,25 @@ class _AppState extends State<App> {
   late final ThemeApp themeApp;
   @override
   void initState() {
-    themeApp = context.read<ThemeApp>();
     super.initState();
+    themeApp = context.read<ThemeApp>();
+    themeApp.loadTheme();
   }
 
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-      valueListenable: themeApp.theme,
+      valueListenable: themeApp.themeType,
       builder: (context, theme, child) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: theme,
-          home: const AudioDashboardPage(),
+        if (theme != null) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: theme,
+            home: const AudioDashboardPage(),
+          );
+        }
+        return const Center(
+          child: CircularProgressIndicator(),
         );
       },
     );
