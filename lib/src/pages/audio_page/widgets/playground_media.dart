@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, use_build_context_synchronously
 import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
+import 'package:play_music/main.dart';
 
 import 'audio_item.dart';
 import 'button_repeat_mode.dart';
@@ -43,9 +44,27 @@ class _PlaygroundMediaItemState extends State<PlaygroundMediaItem> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            AudioItem(
-              imagePath: widget.mediaItem.artUri!.path,
-              title: widget.mediaItem.title,
+            StreamBuilder(
+              stream: audioHandler.playbackState
+                  .map((event) => event.processingState)
+                  .distinct(),
+              builder: (context, snapshot) {
+                final state = snapshot.data;
+                switch (state) {
+                  case AudioProcessingState.idle:
+                  case AudioProcessingState.loading:
+                    return const Expanded(
+                      child: Center(child: CircularProgressIndicator()),
+                    );
+                  case AudioProcessingState.ready:
+                    return AudioItem(
+                      imagePath: widget.mediaItem.artUri!.path,
+                      title: widget.mediaItem.title,
+                    );
+                  default:
+                }
+                return Container();
+              },
             ),
             const SizedBox(
               height: 20,
@@ -67,6 +86,9 @@ class _PlaygroundMediaItemState extends State<PlaygroundMediaItem> {
               height: 20,
             ),
             const SeekBar(),
+            const SizedBox(
+              height: 20,
+            ),
           ],
         ),
       ),
